@@ -1,19 +1,10 @@
 <?php
 include "connection.php";
-
 session_start();
 $nick = $_SESSION['nick'];
 
-$alldata ="
-	SELECT * FROM msg
-";
-
-$all = $conn->Query($alldata);
-
-$strt_point = mysqli_num_rows($all) - 50;
-
 $msgqry ="
-	SELECT * FROM msg  WHERE id > $strt_point ORDER BY time DESC
+	SELECT * FROM active_users ORDER BY last_check DESC
 ";
 
 /*$msgqry ="
@@ -25,16 +16,20 @@ $msgqry ="
 $result = $conn->Query($msgqry);
 
 if ($result) {
+	echo "<h6>Active Users</h6><ul>";
 	while ($row = mysqli_fetch_assoc($result)) {
+
 		if ($row['nick'] == $nick) {
-			$class = "alert alert-danger";
+			$name = $row['nick']." ( me )";
 		}
 		else
 		{
-			$class = "alert alert-primary";
+			$name = $row['nick'];
 		}
-		echo "<div class='$class'>(".$row['id'].") <b>".$row['nick']."</b> : ".$row['msg']."</div>";
+
+		echo "<li>".$name."</li>";
 	}
+	echo "</ul>";
 }
 else{
 	echo mysqli_error($conn);

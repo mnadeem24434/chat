@@ -27,7 +27,7 @@ if (isset($_POST['user'])) {
 					<div class="card-body">
 						<div class="form-control">
 							<form action="" method="post">
-								<label>You are going to chat with the strangers, create your nick name. Everytime you login you have to choose a nick name.</label>
+							<label>You are going to chat with the strangers, create your nick name. Everytime you login you have to choose a nick name</label>
 								<input name="user" class="form-control" placeholder="Type your nickname here" required></input>
 								<button name="submit" type="submit" class="form-control btn btn-primary">Send</button>
 							</form>
